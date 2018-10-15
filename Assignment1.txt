@@ -1,0 +1,121 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+#include<sys/types.h>
+#include<string.h>
+#include<sys/wait.h>
+
+int sum(int *arr, int n) {
+    int sum = 0;
+    for (int i = 1; i < n; i ++) {
+        sum = sum + arr[i];
+    }
+    return sum;
+}
+int main()
+{
+    int arr[1000];
+    int i;
+    int child_sum=0;
+    srand(time(NULL));
+    for(i=0;i<1000;i++){
+        arr[i]=(rand()%1000);
+    }
+    
+    int cpid = fork();
+    if (cpid < 0){
+        printf("fork Failed" );
+        return 1;}
+    if (cpid ==0 ){
+        for(int i=0;i<100;i++){
+            child_sum = child_sum+sum(arr, 100);}
+        exit(child_sum);
+    }
+    int cpid2 = fork();
+    if (cpid2 < 0){
+        printf("fork Failed" );
+        return 1;}
+    if (cpid2 ==0 ){
+        for(int i=100;i<200;i++){
+            child_sum = child_sum+sum(arr, 100);}
+        exit(child_sum);
+    }
+    int cpid3 = fork();
+    if (cpid3 < 0){
+        printf("fork Failed" );
+        return 1;}
+    if (cpid3 ==0 ){
+        for(int i=200;i<300;i++){
+            child_sum = child_sum+sum(arr, 100);}
+        exit(child_sum);
+    }
+    int cpid4 = fork();
+    if (cpid4 < 0){
+        printf("fork Failed" );
+        return 1;}
+    if (cpid4 ==0 ){
+        for(int i=300;i<400;i++){
+            child_sum = child_sum+sum(arr, 100);}
+        exit(child_sum);
+    }
+    int cpid5 = fork();
+    if (cpid5 < 0){
+        printf("fork Failed" );
+        return 1;}
+    if (cpid5 ==0 ){
+        for(int i=400;i<500;i++){
+            child_sum = child_sum+sum(arr, 100);}
+        exit(child_sum);
+    }
+    int cpid6 = fork();
+    if (cpid6 < 0){
+        printf("fork Failed" );
+        return 1;}
+    if (cpid6 ==0 ){
+        for(int i=500;i<600;i++){
+            child_sum = child_sum+sum(arr, 100);}
+        exit(child_sum);
+    }
+    int cpid7 = fork();
+    if (cpid7 < 0){
+        printf("fork Failed" );
+        return 1;}
+    if (cpid7 ==0 ){
+        for(int i=600;i<700;i++){
+            child_sum = child_sum+sum(arr, 100);}
+        exit(child_sum);
+    }
+    int cpid8 = fork();
+    if (cpid8 < 0){
+        printf("fork Failed" );
+        return 1;}
+    if (cpid8 ==0 ){
+        for(int i=700;i<800;i++){
+            child_sum = child_sum+sum(arr, 100);}
+        exit(child_sum);
+    }
+    int cpid9 = fork();
+    if (cpid9 < 0){
+        printf("fork Failed" );
+        return 1;}
+    if (cpid9 ==0 ){
+        for(int i=800;i<900;i++){
+            child_sum = child_sum+sum(arr, 100);}
+        exit(child_sum);
+    }
+    int cpid10 = fork();
+    if (cpid10 < 0){
+        printf("fork Failed" );
+        return 1;}
+    if (cpid10 ==0 ){
+        for(int i=900;i<1000;i++){
+            child_sum = child_sum+sum(arr, 100);}
+        exit(child_sum);
+    }
+    {
+        int parent_sum;
+        if (wait(&child_sum) == -1)
+            perror("wait failed");
+        else printf("sum from child processes: %d\n", child_sum);
+    }
+}
