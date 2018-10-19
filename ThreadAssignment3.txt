@@ -3,7 +3,7 @@
 #include <pthread.h>
 
 int array[1000];
-int chunk_size = 200;
+int chunk_size = 100;
 
 void * add(void * arg){
     int start = (int)arg;
